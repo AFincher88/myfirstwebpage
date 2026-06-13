@@ -39,6 +39,9 @@
         <h1>Kaibab Trio</h1>
         <p>Shane Werts, oboe | Kelsi Doolittle, clarinet | Aimee Fincher, piano</p>
         <div class="hero-cta"><a href="about.html">Read our story</a></div>
+        <!-- Sample button wired up in sample.js: clicking it runs JavaScript
+             that pops up an alert message. -->
+        <button type="button" id="alert-button">Say hello</button>
       </div>
     </section>
 
@@ -167,5 +170,10 @@
   <!-- <small> carries the legal/secondary connotation for copyright lines -->
   <small>&copy; 2026 Aimee Fincher. All rights reserved.</small>
 </footer>
+
+<!-- Link our JavaScript file. We put it at the very end of <body> so the
+     button above already exists in the page by the time the script runs and
+     tries to find it. -->
+<script src="sample.js"></script>
   </body>
 </html>

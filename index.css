@@ -66,7 +66,8 @@
    .hero-cta a is the hero's outline button; .button-link is the
    filled page button (currently used in the "About Us" band). */
 .hero-cta a,
-.button-link {
+.button-link,
+#alert-button {
   display: inline-block;
   padding: 0.85rem 2rem;
   font-size: 0.82rem;
@@ -78,15 +79,29 @@
   transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
 }
 
-/* Hero button: white outline on the photo, fills white on hover */
-.hero-cta a {
+/* The "Say hello" button is a real <button> element, so it needs a few
+   resets that links don't: <button>s use the browser's default font and
+   show a text cursor, so we inherit the page font and switch to a pointer.
+   The margin-top adds breathing room below the "Read our story" button. */
+#alert-button {
+  font-family: inherit;
+  cursor: pointer;
+  margin-top: 1rem;
+}
+
+/* Hero button: white outline on the photo, fills white on hover.
+   #alert-button shares this look so the two hero buttons match. */
+.hero-cta a,
+#alert-button {
   color: #fff;
   border: 1.5px solid rgba(255, 255, 255, 0.85);
   background: transparent;
 }
 
 .hero-cta a:hover,
-.hero-cta a:focus-visible {
+.hero-cta a:focus-visible,
+#alert-button:hover,
+#alert-button:focus-visible {
   background: #fff;
   color: var(--ink);
   text-decoration: none;
