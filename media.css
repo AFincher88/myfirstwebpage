@@ -1,0 +1,45 @@
+/* ============================================================
+   MEDIA PAGE — Kaibab Trio
+   ------------------------------------------------------------
+   Styles used by media.html: the 2-up grid of video/photo cards,
+   colored like the About tiles. Tints cycle blush → sage → sand.
+
+   Loads AFTER global.css:
+     <link rel="stylesheet" href="global.css" />
+     <link rel="stylesheet" href="media.css" />
+   ============================================================ */
+
+.media-grid {
+  display: grid;
+  /* Fit as many ~360px columns as will fit (2 on desktop, 1 on phones) with
+     no media query. min(360px, 100%) keeps it from overflowing tiny screens. */
+  grid-template-columns: repeat(auto-fit, minmax(min(360px, 100%), 1fr));
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.media-card {
+  margin: 0;            /* <figure> has a default margin — clear it for the grid */
+  padding: 1.5rem;
+  border-radius: 12px;
+}
+
+.media-card:nth-child(3n+1) { background: var(--coral-tint);  }  /* blush */
+.media-card:nth-child(3n+2) { background: var(--green-tint);  }  /* sage  */
+.media-card:nth-child(3n+3) { background: var(--copper-tint); }  /* sand  */
+
+.media-card h2 {
+  margin-top: 0;
+}
+
+.media-card iframe,
+.media-card img {
+  width: 100%;
+  border-radius: 4px;
+}
+
+.media-card p,
+.media-card figcaption {
+  margin-top: 1rem;
+  margin-bottom: 0;
+}

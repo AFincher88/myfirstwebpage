@@ -1,0 +1,972 @@
+/* ============================================================
+   Kaibab Trio — site styles
+   Colors: your existing palette, with darker variants added
+   where the originals were too low-contrast to read.
+   ============================================================ */
+
+/* ---- Design tokens (CSS custom properties) ----
+   Defining colors once here means you change them in ONE place
+   and the whole site updates. Use them below with var(--name). */
+:root {
+  --cream:      #efe8db;  /* page background (your SW "Creamy")        */
+  --cream-soft: #f6f1e8;  /* slightly lighter cream for panels      */
+  --ink:        #2e3a22;  /* main body text — dark green            */
+  --ink-soft:   #50603c;  /* secondary text (taglines, captions)    */
+
+  --green:      #8FA277;  /* your "Broccoflower" — accent           */
+  --green-dark: #5d6e44;  /* darker green for headings/links        */
+  --green-deep: #4a5836;  /* deep green for the footer band         */
+  --green-tint: #c0ccb0;  /* muted Broccoflower tint (green tiles/bands) */
+
+  --coral:      #E3B5A8;  /* your "Mellow Coral" — soft accent      */
+  --coral-mid:  #d49e8c;  /* Mellow Coral, a little darker (buttons) */
+  --coral-dark: #a24e38;  /* darker coral for links (readable, ~4.7:1) */
+  --coral-tint: #f0d6ca;  /* Mellow Coral wash (a bit more saturated) */
+
+  --copper:      #B0764F;  /* SW 7707 Copper Wire — earthy accent    */
+  --copper-deep: #93623f;  /* darker copper (e.g. the "Buy" pill)    */
+  --copper-tint: #ecdcc9;  /* soft Copper Wire wash (media tiles)    */
+
+  --line:       #ddd4c4;  /* hairline borders / dividers            */
+  --maxw:       1080px;   /* width of the centered content column    */
+}
+
+*/ Claude suggests using "inherit" instead of "border-box" and that this is not necessary? Research this more, maybe not needed based on W3*/
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+*/ maybe ; but maybe doesn't hurt anythingdon't need this scroll-behavior if using Javascript to make the scroll happen? Learn more about this in depth ? */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;       /* fallback for old browsers */
+  min-height: 100dvh;      /* tracks the real viewport (mobile address bar) */
+  background-color: var(--cream);
+  color: var(--ink);
+  font-family: "Helvetica Neue", Arial, sans-serif;
+  line-height: 1.7;            /* roomier lines = more "airy"        */
+  -webkit-font-smoothing: antialiased;
+}
+
+img,
+iframe {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Iframes have no natural aspect ratio, so height:auto alone collapses
+   them to ~150px. Give embeds a 16:9 ratio so they stay responsive.
+   (The News carousel overrides this with its own ratio.) */
+iframe {
+  aspect-ratio: 16 / 9;
+}
+
+/* ---- Links: underlined in body text, darker coral for contrast.
+   Chrome elements (nav, wordmark, buttons, pills) switch off the
+   underline in their own rules below. ---- */
+a {
+  color: var(--coral-dark);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+a:hover,
+a:focus-visible {
+  color: var(--green-dark);
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+/* ---- Headings: large, light, generously spaced ---- */
+h1, h2, h3 {
+  color: var(--ink);
+  font-weight: 600;            /* lighter than bold = more elegant   */
+  line-height: 1.2;
+  letter-spacing: 0.01em;
+}
+
+h1 {
+  font-size: clamp(2rem, 5vw, 3.25rem);
+  margin: 0 0 1rem;
+}
+
+h2 {
+  font-size: clamp(1.5rem, 3vw, 2.25rem);
+  margin: 0 0 1rem;
+}
+
+h3 {
+  font-size: clamp(1.15rem, 2vw, 1.4rem);
+  margin: 0 0 0.5rem;
+}
+
+p {
+  margin: 0 0 1.25rem;
+}
+
+/* Subtle dividers instead of heavy lines */
+hr {
+  border: none;
+  border-top: 1px solid var(--line);
+  margin: 3rem 0;
+}
+
+/* ============================================================
+   LAYOUT: one centered column for every page
+   ------------------------------------------------------------
+   These rules center the DIRECT children of <main> at a
+   comfortable width with side padding. That gives About, Media,
+   Resources, and Contact the same tidy column as the home page,
+   with no extra HTML needed.
+   Anything that should span the full window (the hero, the news
+   carousel) opts out with the .full-bleed escape hatch below.
+   ============================================================ */
+main {
+  /* Content-aware grid: a centered middle track capped at --maxw with a
+     1.25rem gutter on each side; full-width items span all three tracks.
+     Replaces the old "max-width on every child + .full-bleed hatch". */
+  display: grid;
+  grid-template-columns: 1fr min(var(--maxw), 100% - 2.5rem) 1fr;
+  padding-bottom: 4rem;
+}
+
+main > * {
+  grid-column: 2;          /* normal blocks sit in the centered track */
+  min-width: 0;            /* let children shrink instead of overflowing */
+}
+
+/* Generous breathing room above the first heading on inner pages */
+main > h1:first-child {
+  margin-top: 3rem;
+}
+
+/* Copper→coral accent bar under inner-page titles (About, Media, etc.) */
+main > h1::after {
+  content: "";
+  display: block;
+  width: 64px;
+  height: 3px;
+  margin-top: 0.6rem;
+  background: linear-gradient(90deg, var(--copper), var(--coral));
+}
+
+/* Full-width blocks span all three columns, edge to edge */
+main > .full-bleed,
+main > .hero {
+  grid-column: 1 / -1;
+}
+
+/* ============================================================
+   HEADER + NAV — minimal, sticky, thin hairline border
+   ============================================================ */
+/* Skip link: hidden offscreen until focused (the only element using it is
+   the <a href="#main"> at the top of each page). */
+a[href="#main"] {
+  position: absolute;
+  left: -999px;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+a[href="#main"]:focus {
+  left: 1rem;
+  top: 1rem;
+  width: auto;
+  height: auto;
+  padding: 0.85rem 1rem;
+  background: var(--coral-dark);
+  color: #fff;
+  border-radius: 0.4rem;
+  text-decoration: none;
+  z-index: 1000;
+}
+
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 30;
+  background: #fff;        /* solid white (dropped the costly blur for performance) */
+  border-top: 4px solid var(--copper);    /* desert copper brand stripe */
+  border-bottom: 1px solid var(--line);   /* thin, not chunky */
+}
+
+.header-inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem 1.5rem;
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: 0.85rem 1.25rem;
+}
+
+.header-inner > div {
+  flex-shrink: 0;
+}
+
+.site-title {
+  margin: 0;
+  font-size: 1.05rem;
+  letter-spacing: 0.18em;       /* wide tracking = refined wordmark */
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+.site-title a {
+  color: var(--green-dark);
+  text-decoration: none;
+}
+
+.site-title a:hover,
+.site-title a:focus-visible {
+  text-decoration: none;
+  color: var(--coral-dark);
+}
+
+.site-tagline {
+  margin: 0.3rem 0 0;
+  color: var(--ink-soft);
+  font-size: 0.9rem;
+  letter-spacing: 0.02em;
+}
+
+/* NAV: understated text links, uppercase with letter-spacing */
+.main-nav {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1.4rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.main-nav a {
+  display: inline-block;
+  padding: 0.2rem 0;
+  color: var(--ink);
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border-bottom: 2px solid transparent;   /* underline grows on hover */
+  transition: color 180ms ease, border-color 180ms ease;
+}
+
+.main-nav a.current,
+.main-nav a[aria-current="page"] {
+  color: var(--coral-dark);
+  border-bottom-color: var(--coral-dark);
+}
+
+.main-nav a:hover,
+.main-nav a:focus-visible {
+  color: var(--coral-dark);
+  border-bottom-color: var(--coral);
+  text-decoration: none;
+}
+
+/* ============================================================
+   HERO — full-width image with overlay + centered text
+   ============================================================ */
+.hero {
+  min-height: 46vh;        /* fallback */
+  min-height: 46dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 4rem 1.25rem;
+  background-image:
+    linear-gradient(rgba(58, 36, 24, 0.45), rgba(120, 72, 48, 0.45)),
+    url("images/KaibabTrioPerf1.jpg");
+  background-size: cover;
+  background-position: center 30%;
+  background-attachment: fixed;        /* photo stays anchored while text scrolls.
+                                          TODO (see TODO-javascript.md): make the
+                                          photo drift at half scroll speed with JS. */
+  color: #fff;
+}
+
+.hero-content {
+  max-width: 820px;
+}
+
+.hero h1 {
+  margin: 0;
+  color: #fff;
+  font-weight: 500;
+  font-size: clamp(2.5rem, 8vw, 4.75rem);
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  text-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+}
+
+.hero p {
+  margin: 1.25rem auto 0;
+  max-width: 42rem;
+  font-size: clamp(1rem, 1.5vw, 1.3rem);
+  letter-spacing: 0.03em;
+  text-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
+}
+
+.hero-cta {
+  margin-top: 2rem;
+}
+
+/* ---- Buttons: rectangular, outlined, editorial (fill on hover) ---- */
+.hero-cta a,
+.button-link {
+  display: inline-block;
+  padding: 0.85rem 2rem;
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border-radius: 2px;
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+/* Hero button: white outline on the photo, fills white on hover */
+.hero-cta a {
+  color: #fff;
+  border: 1.5px solid rgba(255, 255, 255, 0.85);
+  background: transparent;
+}
+
+.hero-cta a:hover,
+.hero-cta a:focus-visible {
+  background: #fff;
+  color: var(--ink);
+  text-decoration: none;
+}
+
+/* Page button: filled slightly-darker coral with dark-brown text
+   (~7:1 contrast), deepening to coral-dark on hover. */
+.button-link {
+  color: var(--ink);
+  background: var(--coral-mid);
+  border: 1.5px solid var(--coral-mid);
+}
+
+.button-link:hover,
+.button-link:focus-visible {
+  background: var(--coral-dark);
+  border-color: var(--coral-dark);
+  color: #fff;
+  text-decoration: none;
+}
+
+/* ============================================================
+   CONTENT SECTIONS — flat & airy (no heavy cards/shadows)
+   ============================================================ */
+.content-section {
+  margin: 0 auto;
+  padding: 3.5rem 1.25rem;
+}
+
+/* Center major section titles with a short accent rule beneath —
+   a clean, gallery-like touch. */
+.content-section > h2,
+main > section > h2 {
+  text-align: center;
+}
+
+.content-section > h2::after,
+main > section > h2::after {
+  content: "";
+  display: block;
+  width: 64px;
+  height: 3px;
+  margin: 0.85rem auto 0;
+  background: linear-gradient(90deg, var(--copper), var(--coral));
+}
+
+/* ---- Image + text band (home "About Us") ----
+   .media-row puts an image beside a text column; they stack on
+   narrow screens. Add the matching markup in index.html. */
+.media-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 2.5rem;
+  margin-top: 2rem;
+}
+
+.media-row img {
+  flex: 0 0 auto;
+  width: 360px;          /* fixed 360px wide; height scales via height:auto */
+  max-width: 100%;       /* but never overflow a narrow screen */
+  height: auto;
+  border-radius: 4px;
+}
+
+.media-row-text {
+  flex: 1 1 320px;
+}
+
+.media-row-text p:last-child {
+  margin-bottom: 0;
+}
+
+/* Plain images inside content get a subtle rounding + spacing */
+.content-section img {
+  border-radius: 4px;
+  margin: 1rem auto;
+}
+
+/* ---- Full-width color band behind a centered section ----
+   Spans all grid columns (edge to edge) and re-centers its own content
+   to --maxw — same approach as the News band, no box-shadow hack. */
+.band-blush {
+  grid-column: 1 / -1;
+  background: var(--coral-tint);
+}
+
+.band-blush > * {
+  max-width: var(--maxw);
+  margin-inline: auto;
+}
+
+/* ============================================================
+   ABOUT PAGE — member tiles
+   Each photo + text group is its own colored panel ("tile") for clear
+   separation. Photos zig-zag left / right / left, and the tile color
+   alternates blush / sage.
+   ============================================================ */
+.member {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 2.5rem;
+  margin: 2rem 0;
+  padding: 1.75rem 2rem;
+  border-radius: 12px;
+}
+
+.member-text {
+  flex: 1 1 320px;
+}
+
+/* Odd members (1st, 3rd): blush tile, photo on the left */
+.member:nth-of-type(odd) {
+  background: var(--coral-tint);
+}
+
+/* Even members (2nd): sage tile, photo on the right */
+.member:nth-of-type(even) {
+  background: var(--green-tint);
+  flex-direction: row-reverse;
+}
+
+/* Photo: a simple cream frame so it lifts off the colored tile */
+.member-photo {
+  flex: 0 0 auto;
+  align-self: center;
+}
+
+.member-photo img {
+  display: block;
+  width: 240px;
+  max-width: 60vw;
+  border: 6px solid var(--cream);    /* cream frame */
+  border-radius: 6px;
+  box-shadow: 0 6px 16px rgba(70, 46, 33, 0.15);
+}
+
+/* ============================================================
+   MEDIA PAGE — video/photo cards in a 2-up grid, colored like the
+   About tiles. Tints cycle blush → sage → sand.
+   ============================================================ */
+.media-grid {
+  display: grid;
+  /* Fit as many ~360px columns as will fit (2 on desktop, 1 on phones) with
+     no media query. min(360px, 100%) keeps it from overflowing tiny screens. */
+  grid-template-columns: repeat(auto-fit, minmax(min(360px, 100%), 1fr));
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.media-card {
+  margin: 0;            /* <figure> has a default margin — clear it for the grid */
+  padding: 1.5rem;
+  border-radius: 12px;
+}
+
+.media-card:nth-child(3n+1) { background: var(--coral-tint);  }  /* blush */
+.media-card:nth-child(3n+2) { background: var(--green-tint);  }  /* sage  */
+.media-card:nth-child(3n+3) { background: var(--copper-tint); }  /* sand  */
+
+.media-card h2 {
+  margin-top: 0;
+}
+
+.media-card iframe,
+.media-card img {
+  width: 100%;
+  border-radius: 4px;
+}
+
+.media-card p,
+.media-card figcaption {
+  margin-top: 1rem;
+  margin-bottom: 0;
+}
+
+/* ============================================================
+   NEWS — horizontal scroll "carousel" (CSS only)
+   ------------------------------------------------------------
+   The <ul class="news-grid"> scrolls sideways and snaps to each
+   card. Swipe on a phone, or scroll/drag on a trackpad. (Prev/Next
+   buttons would need JavaScript, which we'll add later.)
+   ============================================================ */
+.news {
+  padding: 3.5rem 0;
+  background: var(--green-tint);
+}
+
+.news > * {
+  /* keep the heading/intro text in the centered column even though
+     the section itself is full-bleed */
+  max-width: var(--maxw);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
+}
+
+.news-grid {
+  list-style: none;
+  display: flex;
+  gap: 1.5rem;
+  margin: 1.5rem 0 0;
+  /* full-bleed scroller, but cards start aligned to the column edge */
+  padding: 0.5rem max(1.25rem, calc((100% - var(--maxw)) / 2 + 1.25rem)) 1.5rem;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+}
+
+.news-grid > li {
+  flex: 0 0 clamp(280px, 80vw, 380px);
+  scroll-snap-align: start;
+  background: var(--cream-soft);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.news-grid > li img,
+.news-grid > li iframe {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 10;
+}
+
+/* object-fit only affects <img> (not <iframe>) */
+.news-grid > li img {
+  object-fit: cover;
+}
+
+.news-grid > li h3 {
+  margin: 1rem 1.25rem 0.5rem;
+  color: var(--green-dark);
+}
+
+.news-grid > li p {
+  margin: 0 1.25rem 1.25rem;
+  color: var(--ink-soft);
+  font-size: 0.95rem;
+}
+
+/* ============================================================
+   TABLES (Resources repertoire list) — clean "card" table
+   ============================================================ */
+
+/* Wrapper: rounds + shadows the table into a card, and lets it scroll
+   sideways on narrow screens instead of overflowing the page. */
+.table-wrap {
+  overflow: auto;          /* scroll sideways on small screens, and... */
+  max-height: 70vh;        /* ...scroll a long list inside the card so the
+                              header can stay pinned (see sticky thead below) */
+  margin: 1.5rem 0;
+  border-radius: 12px;
+  box-shadow: 0 12px 30px rgba(70, 46, 33, 0.10);
+}
+
+main table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+  background: #fff;
+  min-width: 640px;        /* keep columns readable; wrapper scrolls if needed */
+}
+
+/* Horizontal rules only — no vertical grid lines */
+main th,
+main td {
+  padding: 0.9rem 1.1rem;
+  text-align: left;
+  vertical-align: top;
+  border-bottom: 1px solid var(--line);
+}
+
+/* Solid green header bar that stays pinned while scrolling a long list */
+main thead th {
+  background: var(--green);
+  color: var(--ink);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  border-bottom: none;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+/* Zebra striping + soft hover highlight */
+main tbody tr:nth-child(even) {
+  background: rgba(143, 162, 119, 0.08);   /* faint sage */
+}
+
+main tbody tr:hover {
+  background: rgba(227, 181, 168, 0.22);   /* soft blush */
+}
+
+/* No divider under the final row */
+main tbody tr:last-child td {
+  border-bottom: none;
+}
+
+/* Center the short columns: Year (3rd) and Duration (4th) */
+main th:nth-child(3),
+main td:nth-child(3),
+main th:nth-child(4),
+main td:nth-child(4) {
+  text-align: center;
+}
+
+/* Action pills, color-coded by type, each with a small leading icon */
+main td:last-child a {
+  display: inline-block;
+  padding: 0.4rem 0.85rem;
+  border-radius: 999px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  text-decoration: none;
+  white-space: nowrap;
+  color: var(--ink);
+  background: var(--coral);          /* fallback if no pill-* class */
+  transition: filter 0.15s ease;
+}
+
+main td:last-child a:hover,
+main td:last-child a:focus-visible {
+  filter: brightness(0.93);
+}
+
+.pill-score  { background: var(--coral); }
+.pill-listen { background: var(--green); }
+.pill-buy    { background: var(--copper-deep); color: var(--cream); }
+
+.pill-score::before  { content: "\266A\00A0"; }   /* ♪  Score  */
+.pill-listen::before { content: "\25B6\00A0"; }   /* ▶  Listen */
+.pill-buy::before    { content: "$\00A0"; }        /* $  Buy    */
+
+/* In-cell hierarchy: bold Title, muted Composer & Duration */
+main tbody td:first-child {
+  font-weight: 700;
+}
+
+main tbody td:nth-child(2) {
+  color: var(--ink-soft);
+  font-size: 0.92rem;
+}
+
+main tbody td:nth-child(4) {
+  color: var(--ink-soft);
+  font-size: 0.9rem;
+}
+
+/* Year shown as a small rounded chip */
+.chip {
+  display: inline-block;
+  padding: 0.15rem 0.55rem;
+  background: var(--cream-soft);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  font-size: 0.85rem;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+/* Lists in body content */
+main ul,
+main ol {
+  padding-left: 1.25rem;
+}
+
+main li {
+  margin: 0.5rem 0;
+}
+
+/* ============================================================
+   FORMS (Contact) Note: Probably want to change the contact form to the simpler mailto: version, but these styles are here if you want to use them for a future form. Also, the form doesn't have to be in the main column — it could be a full-bleed block with a tinted background, like the hero or the news carousel.  
+   ============================================================ */
+form {
+  max-width: 640px;
+}
+
+input,
+textarea {
+  width: 100%;
+  padding: 0.8rem 1rem;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  background: #fff;
+  color: var(--ink);
+}
+
+input:focus,
+textarea:focus {
+  outline: 2px solid var(--coral);
+  outline-offset: 1px;
+  border-color: var(--coral);
+}
+
+label {
+  font-weight: 600;
+  color: var(--ink);
+}
+
+fieldset {
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  padding: 1rem 1.25rem;
+  margin: 1rem 0 0;
+}
+
+legend {
+  font-weight: 600;
+  color: var(--green-dark);
+  padding: 0 0.5rem;
+}
+
+/* Radio buttons shouldn't stretch full width like text inputs */
+input[type="radio"],
+input[type="checkbox"] {
+  width: auto;
+}
+
+button {
+  cursor: pointer;
+  background: var(--coral-dark);
+  color: #fff;
+  border: 1.5px solid var(--coral-dark);
+  padding: 0.8rem 2rem;
+  border-radius: 2px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+button:hover,
+button:focus-visible {
+  background: transparent;
+  color: var(--coral-dark);
+}
+
+/* ============================================================
+   FOOTER — quiet, with a thin top rule
+   ============================================================ */
+footer {
+  background: var(--green-deep);
+  border-top: 4px solid var(--copper);
+  padding: 2.5rem 1.25rem;
+  margin-top: 0;
+  color: var(--cream);
+  font-size: 0.9rem;
+}
+
+footer nav {
+  margin-bottom: 1rem;
+}
+
+footer a {
+  color: var(--cream);
+  text-decoration: underline;
+  text-decoration-color: var(--coral);
+}
+
+footer nav a {
+  margin-right: 0.5rem;
+}
+
+footer address {
+  font-style: normal;
+  margin-bottom: 1rem;
+}
+
+footer address,
+footer small {
+  display: block;
+}
+
+footer small {
+  margin-top: 1rem;
+  color: var(--cream);
+}
+
+/* Constrain footer content to the centered column too */
+footer > * {
+  max-width: var(--maxw);
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* ============================================================
+   RESPONSIVE — stack the header on small screens, calm the hero
+   ============================================================ */
+@media (max-width: 760px) {
+  .header-inner {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .main-nav {
+    gap: 1rem 1.2rem;
+  }
+
+  .hero {
+    background-attachment: scroll;   /* fixed parallax is janky on phones */
+    min-height: 40vh;
+    min-height: 40dvh;
+  }
+
+  .media-row {
+    gap: 1.5rem;
+    flex-direction: column;
+  }
+
+  /* On mobile, show the text before the photo */
+  .media-row-text {
+    order: -1;
+  }
+}
+
+/* ============================================================
+   RESPONSIVE TABLE — on phones, turn the repertoire table into
+   stacked cards (one card per piece). Each cell shows its column
+   name via its data-label attribute; the header row is hidden.
+   ============================================================ */
+@media (max-width: 640px) {
+  .table-wrap {
+    max-height: none;        /* no inner scroll — cards flow normally */
+    overflow: visible;
+    border-radius: 0;
+    box-shadow: none;
+  }
+
+  main table {
+    min-width: 0;            /* drop the 640px floor so cards fit */
+  }
+
+  /* the header row is redundant once every cell carries its label */
+  main thead {
+    display: none;
+  }
+
+  main tbody,
+  main tbody tr,
+  main tbody td {
+    display: block;
+    width: 100%;
+  }
+
+  /* each row becomes a white card */
+  main tbody tr {
+    margin-bottom: 1.25rem;
+    padding: 0.75rem 1rem;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    background: #fff;
+  }
+
+  main tbody tr:nth-child(even) {
+    background: #fff;        /* override the desktop zebra striping */
+  }
+
+  /* "Label .......... value" rows */
+  main tbody td {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    text-align: right;
+    border-bottom: none;
+    padding: 0.35rem 0;
+  }
+
+  main tbody td::before {
+    content: attr(data-label);
+    font-weight: 600;
+    color: var(--ink-soft);
+    text-align: left;
+  }
+
+  /* Title spans the full width as the card's heading (no label) */
+  main tbody td:first-child {
+    display: block;
+    text-align: left;
+    font-size: 1.05rem;
+    padding: 0 0 0.5rem;
+    margin-bottom: 0.5rem;
+    border-bottom: 1px solid var(--line);
+  }
+
+  main tbody td:first-child::before {
+    content: none;
+  }
+}
+
+/* ============================================================
+   REDUCED MOTION — respect visitors who ask their device for less
+   motion: turn off smooth scrolling, animations, transitions, and
+   the parallax-style fixed hero.
+   ============================================================ */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .hero {
+    background-attachment: scroll;
+  }
+}

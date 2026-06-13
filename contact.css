@@ -1,0 +1,80 @@
+/* ============================================================
+   CONTACT PAGE — Kaibab Trio
+   ------------------------------------------------------------
+   Styles used by contact.html: the contact form (inputs,
+   textarea, the radio-button fieldset, and the submit button).
+
+   Loads AFTER global.css:
+     <link rel="stylesheet" href="global.css" />
+     <link rel="stylesheet" href="contact.css" />
+
+   Note from the original mystyle.css: you may switch to a simpler
+   mailto: form later, but these styles are here if you keep an
+   HTML form. The form doesn't have to live in the main column —
+   it could be a full-bleed tinted block like the hero or news band.
+   ============================================================ */
+
+form {
+  max-width: 640px;
+}
+
+input,
+textarea {
+  width: 100%;
+  padding: 0.8rem 1rem;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  background: #fff;
+  color: var(--ink);
+}
+
+input:focus,
+textarea:focus {
+  outline: 2px solid var(--coral);
+  outline-offset: 1px;
+  border-color: var(--coral);
+}
+
+label {
+  font-weight: 600;
+  color: var(--ink);
+}
+
+fieldset {
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  padding: 1rem 1.25rem;
+  margin: 1rem 0 0;
+}
+
+legend {
+  font-weight: 600;
+  color: var(--green-dark);
+  padding: 0 0.5rem;
+}
+
+/* Radio buttons shouldn't stretch full width like text inputs */
+input[type="radio"],
+input[type="checkbox"] {
+  width: auto;
+}
+
+button {
+  cursor: pointer;
+  background: var(--coral-dark);
+  color: #fff;
+  border: 1.5px solid var(--coral-dark);
+  padding: 0.8rem 2rem;
+  border-radius: 2px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+button:hover,
+button:focus-visible {
+  background: transparent;
+  color: var(--coral-dark);
+}

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Get in touch with the Kaibab Trio about performances, teaching, and collaborations." />
+    <title>Contact — Kaibab Trio</title>
+    <link rel="icon" href="images/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="global.css" />
+    <link rel="stylesheet" href="contact.css" />
+  </head>
+  <body>
+
+    <!-- Skip link: first focusable element so keyboard/screen-reader users can
+         jump past the nav to the main content. Pure HTML anchor to #main. -->
+    <a href="#main">Skip to Main Content</a>
+
+    <!-- Site header: site name (plain text) + tagline, wrapping the nav below. -->
+    <header class="site-header">
+      <div class="header-inner">
+        <div>
+          <p class="site-title"><a href="index.html">Kaibab Trio</a></p>
+          <p class="site-tagline">Shane Werts, oboe | Kelsi Doolittle, clarinet | Aimee Fincher, piano</p>
+        </div>
+        <nav class="main-nav" aria-label="Primary">
+          <a href="index.html">HOME</a>
+          <a href="about.html">ABOUT</a>
+          <a href="media.html">MEDIA</a>
+          <a href="resources.html">RESOURCES</a>
+          <a href="contact.html" class="current" aria-current="page">CONTACT</a>
+        </nav>
+      </div>
+    </header>
+
+    <main id="main" tabindex="-1">
+
+    <h1>Collaborate with Us</h1>
+    <p>Interested in working together? Fill out the form below and we'll be in touch.</p>
+
+    <!-- Email link option (no form needed).
+         A "mailto:" link opens the visitor's own email app (Mail, Gmail, etc.)
+         with a new message already addressed to us. Optional extras after the
+         "?" pre-fill the message: subject= sets the subject line, and you could
+         also add &body= to pre-fill the message text. Spaces are written as %20.
+         Replace the address below with your real trio email. -->
+    <p>Prefer email? <a href="mailto:kaibabtrio@example.com?subject=Website%20Inquiry">Email us directly</a>.</p>
+
+    <!-- Placeholder form only — not connected to email or any backend yet.
+         action="#" means submitting does nothing. Wire it up later. -->
+         <!-- Do we want our trio email visible or not? Should the form be self-contained so they don't have to send it through their email (and see ours?) Maybe this is not an important question...-->
+    <form action="#" method="POST">
+      <p>
+        <label for="name">Your Name:<br />
+        <input type="text" id="name" name="Name" placeholder="Jane Smith" autocomplete="name" required /></label>
+      </p>
+      <p>
+        <label for="email">Your Email:<br />
+        <input type="email" id="email" name="Email" placeholder="jane@example.com" autocomplete="email" required /></label>
+      </p>
+      <p>
+        <label for="subject">Subject:<br />
+        <input type="text" id="subject" name="Subject" placeholder="Collaboration idea" required /></label>
+      </p>
+      <!-- Radio group: all share name="Interest" so only ONE can be chosen.
+           <fieldset>/<legend> is the correct HTML way to label a group. -->
+      <fieldset>
+        <legend>I am interested in:</legend>
+        <p>
+          <input type="radio" id="performance" name="Interest" value="Performance" />
+          <label for="performance">Performance</label><br />
+
+          <input type="radio" id="teaching" name="Interest" value="Teaching" />
+          <label for="teaching">Teaching</label><br />
+
+          <input type="radio" id="both" name="Interest" value="Both Performance and Teaching" />
+          <label for="both">Both Performance and Teaching</label>
+        </p>
+      </fieldset>
+      <p>
+        <label for="message">Message:<br />
+        <textarea id="message" name="Message" rows="6" cols="40" placeholder="Tell us about your project or idea..." required></textarea></label>
+      </p>
+      <p>
+        <button type="submit">Send Message</button>
+      </p>
+    </form>
+
+    </main>
+     <footer>
+  <!-- Repeat the main nav so people who scroll to the bottom can get around -->
+  <nav aria-label="Footer">
+    <a href="index.html">Home</a> |
+    <a href="about.html">About</a> |
+    <a href="media.html">Media</a> |
+    <a href="resources.html">Resources</a> |
+    <a href="contact.html">Contact</a>
+  </nav>
+
+  <!-- <address> is the correct tag for contact details of the page/site owner -->
+  <address>
+    Aimee Fincher<br>Placeholder text (link to contact form? here)
+  </address>
+
+  <!-- Not going to use the social links below right now  -->
+  <!-- External links: rel="noopener" is good practice with target="_blank" -->
+  <nav aria-label="Social media">
+    <a href="#" target="_blank" rel="noopener">Instagram</a> |
+    <a href="#" target="_blank" rel="noopener">YouTube</a> |
+    <a href="#" target="_blank" rel="noopener">Facebook</a>
+  </nav>
+
+  <!-- <small> carries the legal/secondary connotation for copyright lines -->
+  <small>&copy; 2026 Aimee Fincher. All rights reserved.</small>
+</footer>
+  </body>
+</html>

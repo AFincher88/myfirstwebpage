@@ -1,0 +1,13 @@
+Conversation saved from GitHub Copilot session:
+
+User: Tell me all the specific HTML5 tags that are more descriptive than original HTML
+Assistant: Provided a list of semantic HTML5 tags.
+
+User: can <video> embed a youtube with a preview?
+Assistant: No — <video> cannot directly embed a YouTube video URL. Recommended use of <iframe> and explanation of supported media.
+
+User: What is the smallest kind of video file to save space?
+Assistant: Explained that file size depends on codec/bitrate/resolution; recommended AV1, HEVC, or H.264.
+
+User: Save this conversation in a file so I can clear it
+Assistant: Created this file: conversation_saved.txt

@@ -1,0 +1,399 @@
+/* ============================================================
+   BACKUP of the original mystyle.css
+   Saved before the "herartinsong-style" restyle.
+   To roll back: copy this file's contents back into mystyle.css
+   (or rename this file to mystyle.css).
+   ============================================================ */
+
+/* Site palette:
+   Creamy: #efe8db    (off-white)
+   Mellow Coral: #E3B5A8
+  Secondary (was Copper Wire): #E3B5A8
+   Broccoflower: #8FA277
+*/
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  background-color: #efe8db;
+  color: #8FA277;
+  font-family: "Helvetica Neue", Arial, sans-serif;
+  line-height: 1.6;
+}
+
+img,
+iframe {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+a {
+  color: #E3B5A8;
+  text-decoration: none;
+}
+
+a:hover,
+a:focus {
+  color: #8FA277;
+  text-decoration: underline;
+}
+
+button,
+input,
+textarea {
+  font: inherit;
+}
+
+.skip-link {
+  position: absolute;
+  left: -999px;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+.skip-link:focus {
+  left: 1rem;
+  top: 1rem;
+  width: auto;
+  height: auto;
+  padding: 0.85rem 1rem;
+  background: #E3B5A8;
+  color: #fff;
+  border-radius: 0.5rem;
+  z-index: 1000;
+}
+
+.header-inner {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 0;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0;
+}
+
+.header-inner > div {
+  padding: 1rem 1.25rem;
+  flex-shrink: 0;
+}
+
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 30;
+  background: rgba(255, 255, 255, 0.94);
+  border-bottom: 4px solid #E3B5A8;
+  backdrop-filter: saturate(150%) blur(10px);
+}
+
+.site-title {
+  margin: 0;
+  font-size: 1rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+.site-title a {
+  color: #8FA277;
+}
+
+.site-tagline {
+  margin: 0.25rem 0 0;
+  color: #5b5046;
+  font-size: 0.95rem;
+}
+
+/* NAV: text links */
+.main-nav {
+  display: flex;
+  flex: 1;
+  flex-wrap: nowrap;
+  align-items: center;
+  gap: 0.75rem;
+  margin: 0;
+  padding: 0 1rem;
+  list-style: none;
+  background: transparent;
+  height: 100%;
+  min-height: 80px;
+}
+
+.main-nav a {
+  display: inline-block;
+  padding: 0.25rem 0.5rem;
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  color: #8FA277;
+  font-weight: 700;
+  text-decoration: none;
+  transition: color 180ms ease;
+  flex-shrink: 0;
+}
+
+.main-nav a.current,
+.main-nav a[aria-current="page"] {
+  color: #E3B5A8;
+  text-decoration: underline;
+}
+
+.main-nav a:hover,
+.main-nav a:focus {
+  color: #E3B5A8;
+  outline: none;
+}
+
+.hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 0 1rem;
+  background-image: linear-gradient(180deg, rgba(227, 181, 168, 0.55), rgba(143, 162, 119, 0.28)), url("images/KaibabTrioPerf1.jpg");
+  background-size: cover;
+  background-position: center 30%;
+  background-attachment: fixed;
+  position: relative;
+  color: #fff;
+}
+
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.28);
+}
+
+.hero-content {
+  position: relative;
+  z-index: 1;
+  max-width: 900px;
+}
+
+.hero h1 {
+  margin: 0;
+  font-size: clamp(2.5rem, 8vw, 4.5rem);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  text-shadow: 0 18px 30px rgba(0, 0, 0, 0.4);
+}
+
+.hero p {
+  margin: 1rem auto 0;
+  max-width: 40rem;
+  font-size: clamp(1rem, 1.3vw, 1.4rem);
+  text-shadow: 0 12px 24px rgba(0, 0, 0, 0.25);
+}
+
+.hero-cta {
+  margin-top: 1.75rem;
+}
+
+.hero-cta a {
+  display: inline-block;
+  padding: 0.9rem 1.6rem;
+  background: #E3B5A8;
+  color: #8FA277;
+  border: 2px solid #E3B5A8;
+  border-radius: 999px;
+  font-weight: 700;
+  transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.hero-cta a:hover,
+.hero-cta a:focus {
+  background: #E3B5A8;
+  color: #fff;
+  transform: translateY(-1px);
+}
+
+.content-section {
+  background: #fff;
+  border: 1px solid rgba(227, 181, 168, 0.18);
+  border-radius: 1.5rem;
+  box-shadow: 0 18px 50px rgba(70, 46, 33, 0.06);
+  margin: 2rem auto;
+  padding: 2rem;
+  max-width: 1100px;
+}
+
+.content-section h2,
+.content-section h1,
+.content-section h3 {
+  color: #E3B5A8;
+}
+
+.content-section ul {
+  padding-left: 1.25rem;
+}
+
+.content-section li {
+  margin: 0.65rem 0;
+}
+
+.content-section table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #fdf9f5;
+}
+
+.content-section th,
+.content-section td {
+  border: 1px solid rgba(227, 181, 168, 0.25);
+  padding: 0.9rem 0.75rem;
+  text-align: left;
+}
+
+.content-section th {
+  background: #efe2dc;
+  color: #5b4033;
+}
+
+.content-section img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 1rem;
+  margin: 1rem 0;
+}
+
+.button-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.85rem 1.4rem;
+  background: #E3B5A8;
+  color: #8FA277;
+  border: 2px solid #E3B5A8;
+  border-radius: 999px;
+  font-weight: 700;
+  transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.button-link:hover,
+.button-link:focus {
+  background: #E3B5A8;
+  color: #fff;
+  transform: translateY(-1px);
+}
+
+footer {
+  background: #fff7f2;
+  border-top: 4px solid #E3B5A8;
+  padding: 2rem 0;
+  margin-top: 3rem;
+}
+
+.footer-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 1.25rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 1.25rem;
+  color: #5b5046;
+}
+
+.footer-inner nav a {
+  color: #8FA277;
+  text-decoration: none;
+  margin-right: 0.75rem;
+}
+
+.footer-inner nav a:hover,
+.footer-inner nav a:focus {
+  color: #8FA277;
+}
+
+footer address,
+footer small {
+  display: block;
+}
+
+button {
+  cursor: pointer;
+  background: #E3B5A8;
+  color: #fff;
+  border: none;
+  padding: 0.9rem 1.2rem;
+  border-radius: 999px;
+}
+
+button:hover,
+button:focus {
+  background: #8FA277;
+}
+
+input,
+textarea {
+  width: 100%;
+  padding: 0.85rem 1rem;
+  border: 1px solid rgba(227, 181, 168, 0.35);
+  border-radius: 0.9rem;
+  background: #fff;
+  color: #2f2a26;
+}
+
+fieldset {
+  border: 1px solid rgba(227, 181, 168, 0.35);
+  border-radius: 1rem;
+  padding: 1rem;
+  margin: 1rem 0 0;
+}
+
+legend {
+  font-weight: 700;
+  color: #E3B5A8;
+}
+
+@media (max-width: 840px) {
+  .header-inner {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .main-nav {
+    width: 100%;
+    min-height: 60px;
+    background: transparent;
+  }
+
+  .content-section {
+    padding: 1.5rem;
+  }
+
+  .footer-inner {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+@media (max-width: 600px) {
+  .hero {
+    background-attachment: scroll;
+    min-height: 72vh;
+    padding: 4rem 1rem;
+  }
+
+  .main-nav {
+    justify-content: flex-start;
+  }
+}

@@ -1,0 +1,102 @@
+/* ============================================================
+   ABOUT PAGE — Kaibab Trio
+   ------------------------------------------------------------
+   Styles used by about.html: the intro image+text band
+   (.media-row) and the alternating member bio tiles (.member).
+
+   Loads AFTER global.css:
+     <link rel="stylesheet" href="global.css" />
+     <link rel="stylesheet" href="about.css" />
+
+   Note: .media-row is also used on the home page, so the same
+   rules appear in index.css too — each page file is kept
+   self-contained on purpose.
+   ============================================================ */
+
+/* ---- Image + text band (intro: group photo beside the story) ----
+   .media-row puts an image beside a text column; they stack on
+   narrow screens. */
+.media-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 2.5rem;
+  margin-top: 2rem;
+}
+
+.media-row img {
+  flex: 0 0 auto;
+  width: 360px;          /* fixed 360px wide; height scales via height:auto */
+  max-width: 100%;       /* but never overflow a narrow screen */
+  height: auto;
+  border-radius: 4px;
+}
+
+.media-row-text {
+  flex: 1 1 320px;
+}
+
+.media-row-text p:last-child {
+  margin-bottom: 0;
+}
+
+/* ============================================================
+   MEMBER TILES
+   Each photo + text group is its own colored panel ("tile") for clear
+   separation. Photos zig-zag left / right / left, and the tile color
+   alternates blush / sage.
+   ============================================================ */
+.member {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 2.5rem;
+  margin: 2rem 0;
+  padding: 1.75rem 2rem;
+  border-radius: 12px;
+}
+
+.member-text {
+  flex: 1 1 320px;
+}
+
+/* Odd members (1st, 3rd): blush tile, photo on the left */
+.member:nth-of-type(odd) {
+  background: var(--coral-tint);
+}
+
+/* Even members (2nd): sage tile, photo on the right */
+.member:nth-of-type(even) {
+  background: var(--green-tint);
+  flex-direction: row-reverse;
+}
+
+/* Photo: a simple cream frame so it lifts off the colored tile */
+.member-photo {
+  flex: 0 0 auto;
+  align-self: center;
+}
+
+.member-photo img {
+  display: block;
+  width: 240px;
+  max-width: 60vw;
+  border: 6px solid var(--cream);    /* cream frame */
+  border-radius: 6px;
+  box-shadow: 0 6px 16px rgba(70, 46, 33, 0.15);
+}
+
+/* ============================================================
+   RESPONSIVE (About only) — stack the intro image band
+   ============================================================ */
+@media (max-width: 760px) {
+  .media-row {
+    gap: 1.5rem;
+    flex-direction: column;
+  }
+
+  /* On mobile, show the text before the photo */
+  .media-row-text {
+    order: -1;
+  }
+}

@@ -1,0 +1,407 @@
+/* ============================================================
+   GLOBAL STYLES — Kaibab Trio
+   ------------------------------------------------------------
+   These rules apply to EVERY page. They're the "frame" the site
+   shares: color/design tokens, base element styling (body, links,
+   headings), the centered-column layout, the header/nav, and the
+   footer. Each page also loads ONE page-specific file after this
+   one (index.css, about.css, etc.) for the parts unique to it.
+
+   Load order in the HTML matters: global.css first, then the page
+   file, so the page file can build on (or override) these rules.
+
+   Source: split out of the original mystyle.css, which is kept
+   intact as a reference.
+   ============================================================ */
+
+/* ---- Design tokens (CSS custom properties) ----
+   Defining colors once here means you change them in ONE place
+   and the whole site updates. Use them below with var(--name). */
+:root {
+  --cream:      #efe8db;  /* page background (your SW "Creamy")        */
+  --cream-soft: #f6f1e8;  /* slightly lighter cream for panels      */
+  --ink:        #2e3a22;  /* main body text — dark green            */
+  --ink-soft:   #50603c;  /* secondary text (taglines, captions)    */
+
+  --green:      #8FA277;  /* your "Broccoflower" — accent           */
+  --green-dark: #5d6e44;  /* darker green for headings/links        */
+  --green-deep: #4a5836;  /* deep green for the footer band         */
+  --green-tint: #c0ccb0;  /* muted Broccoflower tint (green tiles/bands) */
+
+  --coral:      #E3B5A8;  /* your "Mellow Coral" — soft accent      */
+  --coral-mid:  #d49e8c;  /* Mellow Coral, a little darker (buttons) */
+  --coral-dark: #a24e38;  /* darker coral for links (readable, ~4.7:1) */
+  --coral-tint: #f0d6ca;  /* Mellow Coral wash (a bit more saturated) */
+
+  --copper:      #B0764F;  /* SW 7707 Copper Wire — earthy accent    */
+  --copper-deep: #93623f;  /* darker copper (e.g. the "Buy" pill)    */
+  --copper-tint: #ecdcc9;  /* soft Copper Wire wash (media tiles)    */
+
+  --line:       #ddd4c4;  /* hairline borders / dividers            */
+  --maxw:       1080px;   /* width of the centered content column    */
+}
+
+/* Claude suggests using "inherit" instead of "border-box" and that this is not necessary? Research this more, maybe not needed based on W3 */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* maybe ; but maybe doesn't hurt anything don't need this scroll-behavior if using Javascript to make the scroll happen? Learn more about this in depth ? */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;       /* fallback for old browsers */
+  min-height: 100dvh;      /* tracks the real viewport (mobile address bar) */
+  background-color: var(--cream);
+  color: var(--ink);
+  font-family: "Helvetica Neue", Arial, sans-serif;
+  line-height: 1.7;            /* roomier lines = more "airy"        */
+  -webkit-font-smoothing: antialiased;
+}
+
+img,
+iframe {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Iframes have no natural aspect ratio, so height:auto alone collapses
+   them to ~150px. Give embeds a 16:9 ratio so they stay responsive.
+   (The News carousel overrides this with its own ratio.) */
+iframe {
+  aspect-ratio: 16 / 9;
+}
+
+/* ---- Links: underlined in body text, darker coral for contrast.
+   Chrome elements (nav, wordmark, buttons, pills) switch off the
+   underline in their own rules below. ---- */
+a {
+  color: var(--coral-dark);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+a:hover,
+a:focus-visible {
+  color: var(--green-dark);
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+/* ---- Headings: large, light, generously spaced ---- */
+h1, h2, h3 {
+  color: var(--ink);
+  font-weight: 600;            /* lighter than bold = more elegant   */
+  line-height: 1.2;
+  letter-spacing: 0.01em;
+}
+
+h1 {
+  font-size: clamp(2rem, 5vw, 3.25rem);
+  margin: 0 0 1rem;
+}
+
+h2 {
+  font-size: clamp(1.5rem, 3vw, 2.25rem);
+  margin: 0 0 1rem;
+}
+
+h3 {
+  font-size: clamp(1.15rem, 2vw, 1.4rem);
+  margin: 0 0 0.5rem;
+}
+
+p {
+  margin: 0 0 1.25rem;
+}
+
+/* Subtle dividers instead of heavy lines */
+hr {
+  border: none;
+  border-top: 1px solid var(--line);
+  margin: 3rem 0;
+}
+
+/* Lists in body content */
+main ul,
+main ol {
+  padding-left: 1.25rem;
+}
+
+main li {
+  margin: 0.5rem 0;
+}
+
+/* ============================================================
+   LAYOUT: one centered column for every page
+   ------------------------------------------------------------
+   These rules center the DIRECT children of <main> at a
+   comfortable width with side padding. That gives About, Media,
+   Resources, and Contact the same tidy column as the home page,
+   with no extra HTML needed.
+   Anything that should span the full window (the hero, the news
+   carousel) opts out with the .full-bleed escape hatch below.
+   ============================================================ */
+main {
+  /* Content-aware grid: a centered middle track capped at --maxw with a
+     1.25rem gutter on each side; full-width items span all three tracks.
+     Replaces the old "max-width on every child + .full-bleed hatch". */
+  display: grid;
+  grid-template-columns: 1fr min(var(--maxw), 100% - 2.5rem) 1fr;
+  padding-bottom: 4rem;
+}
+
+main > * {
+  grid-column: 2;          /* normal blocks sit in the centered track */
+  min-width: 0;            /* let children shrink instead of overflowing */
+}
+
+/* Generous breathing room above the first heading on inner pages */
+main > h1:first-child {
+  margin-top: 3rem;
+}
+
+/* Copper→coral accent bar under inner-page titles (About, Media, etc.) */
+main > h1::after {
+  content: "";
+  display: block;
+  width: 64px;
+  height: 3px;
+  margin-top: 0.6rem;
+  background: linear-gradient(90deg, var(--copper), var(--coral));
+}
+
+/* Full-width blocks span all three columns, edge to edge */
+main > .full-bleed,
+main > .hero {
+  grid-column: 1 / -1;
+}
+
+/* Center major section titles with a short accent rule beneath —
+   a clean, gallery-like touch. Used by the home page's sections
+   (About Us, News) and every section on the Resources page. */
+main > section > h2 {
+  text-align: center;
+}
+
+main > section > h2::after {
+  content: "";
+  display: block;
+  width: 64px;
+  height: 3px;
+  margin: 0.85rem auto 0;
+  background: linear-gradient(90deg, var(--copper), var(--coral));
+}
+
+/* ============================================================
+   HEADER + NAV — minimal, sticky, thin hairline border
+   ============================================================ */
+/* Skip link: hidden offscreen until focused (the only element using it is
+   the <a href="#main"> at the top of each page). */
+a[href="#main"] {
+  position: absolute;
+  left: -999px;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+a[href="#main"]:focus {
+  left: 1rem;
+  top: 1rem;
+  width: auto;
+  height: auto;
+  padding: 0.85rem 1rem;
+  background: var(--coral-dark);
+  color: #fff;
+  border-radius: 0.4rem;
+  text-decoration: none;
+  z-index: 1000;
+}
+
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 30;
+  background: #fff;        /* solid white (dropped the costly blur for performance) */
+  border-top: 4px solid var(--copper);    /* desert copper brand stripe */
+  border-bottom: 1px solid var(--line);   /* thin, not chunky */
+}
+
+.header-inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem 1.5rem;
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: 0.85rem 1.25rem;
+}
+
+.header-inner > div {
+  flex-shrink: 0;
+}
+
+.site-title {
+  margin: 0;
+  font-size: 1.05rem;
+  letter-spacing: 0.18em;       /* wide tracking = refined wordmark */
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+.site-title a {
+  color: var(--green-dark);
+  text-decoration: none;
+}
+
+.site-title a:hover,
+.site-title a:focus-visible {
+  text-decoration: none;
+  color: var(--coral-dark);
+}
+
+.site-tagline {
+  margin: 0.3rem 0 0;
+  color: var(--ink-soft);
+  font-size: 0.9rem;
+  letter-spacing: 0.02em;
+}
+
+/* NAV: understated text links, uppercase with letter-spacing */
+.main-nav {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1.4rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.main-nav a {
+  display: inline-block;
+  padding: 0.2rem 0;
+  color: var(--ink);
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border-bottom: 2px solid transparent;   /* underline grows on hover */
+  transition: color 180ms ease, border-color 180ms ease;
+}
+
+.main-nav a.current,
+.main-nav a[aria-current="page"] {
+  color: var(--coral-dark);
+  border-bottom-color: var(--coral-dark);
+}
+
+.main-nav a:hover,
+.main-nav a:focus-visible {
+  color: var(--coral-dark);
+  border-bottom-color: var(--coral);
+  text-decoration: none;
+  transform: scale(1.2);
+}
+
+/* ============================================================
+   FOOTER — quiet, with a thin top rule
+   ============================================================ */
+footer {
+  background: var(--green-deep);
+  border-top: 4px solid var(--copper);
+  padding: 2.5rem 1.25rem;
+  margin-top: 0;
+  color: var(--cream);
+  font-size: 0.9rem;
+}
+
+footer nav {
+  margin-bottom: 1rem;
+}
+
+footer a {
+  color: var(--cream);
+  text-decoration: underline;
+  text-decoration-color: var(--coral);
+}
+
+footer nav a {
+  margin-right: 0.5rem;
+}
+
+footer address {
+  font-style: normal;
+  margin-bottom: 1rem;
+}
+
+footer address,
+footer small {
+  display: block;
+}
+
+footer small {
+  margin-top: 1rem;
+  color: var(--cream);
+}
+
+/* Constrain footer content to the centered column too */
+footer > * {
+  max-width: var(--maxw);
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* ============================================================
+   RESPONSIVE (site-wide) — stack the header on small screens.
+   Page-specific responsive tweaks (hero, media-row, tables) live
+   in their own page files.
+   ============================================================ */
+@media (max-width: 760px) {
+  .header-inner {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .main-nav {
+    gap: 1rem 1.2rem;
+  }
+}
+
+/* ============================================================
+   REDUCED MOTION — respect visitors who ask their device for less
+   motion: turn off smooth scrolling, animations, transitions, and
+   the parallax-style fixed hero.
+   ============================================================ */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .hero {
+    background-attachment: scroll;
+  }
+}

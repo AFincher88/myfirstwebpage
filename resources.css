@@ -1,0 +1,209 @@
+/* ============================================================
+   RESOURCES PAGE — Kaibab Trio
+   ------------------------------------------------------------
+   Styles used by resources.html: the repertoire table styled as a
+   "card" (with sticky header, zebra striping, action pills, and
+   year chips), plus the phone view that turns each row into a card.
+
+   Loads AFTER global.css:
+     <link rel="stylesheet" href="global.css" />
+     <link rel="stylesheet" href="resources.css" />
+
+   (The centered section headings + accent rule, and the body-list
+    styling, live in global.css since other pages share them.)
+   ============================================================ */
+
+/* ============================================================
+   TABLES (repertoire list) — clean "card" table
+   ============================================================ */
+
+/* Wrapper: rounds + shadows the table into a card, and lets it scroll
+   sideways on narrow screens instead of overflowing the page. */
+.table-wrap {
+  overflow: auto;          /* scroll sideways on small screens, and... */
+  max-height: 70vh;        /* ...scroll a long list inside the card so the
+                              header can stay pinned (see sticky thead below) */
+  margin: 1.5rem 0;
+  border-radius: 12px;
+  box-shadow: 0 12px 30px rgba(70, 46, 33, 0.10);
+}
+
+main table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+  background: #fff;
+  min-width: 640px;        /* keep columns readable; wrapper scrolls if needed */
+}
+
+/* Horizontal rules only — no vertical grid lines */
+main th,
+main td {
+  padding: 0.9rem 1.1rem;
+  text-align: left;
+  vertical-align: top;
+  border-bottom: 1px solid var(--line);
+}
+
+/* Solid green header bar that stays pinned while scrolling a long list */
+main thead th {
+  background: var(--green);
+  color: var(--ink);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  border-bottom: none;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+/* Zebra striping + soft hover highlight */
+main tbody tr:nth-child(even) {
+  background: rgba(143, 162, 119, 0.08);   /* faint sage */
+}
+
+main tbody tr:hover {
+  background: rgba(227, 181, 168, 0.22);   /* soft blush */
+}
+
+/* No divider under the final row */
+main tbody tr:last-child td {
+  border-bottom: none;
+}
+
+/* Center the short columns: Year (3rd) and Duration (4th) */
+main th:nth-child(3),
+main td:nth-child(3),
+main th:nth-child(4),
+main td:nth-child(4) {
+  text-align: center;
+}
+
+/* Action pills, color-coded by type, each with a small leading icon */
+main td:last-child a {
+  display: inline-block;
+  padding: 0.4rem 0.85rem;
+  border-radius: 999px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  text-decoration: none;
+  white-space: nowrap;
+  color: var(--ink);
+  background: var(--coral);          /* fallback if no pill-* class */
+  transition: filter 0.15s ease;
+}
+
+main td:last-child a:hover,
+main td:last-child a:focus-visible {
+  filter: brightness(0.93);
+}
+
+.pill-score  { background: var(--coral); }
+.pill-listen { background: var(--green); }
+.pill-buy    { background: var(--copper-deep); color: var(--cream); }
+
+.pill-score::before  { content: "\266A\00A0"; }   /* ♪  Score  */
+.pill-listen::before { content: "\25B6\00A0"; }   /* ▶  Listen */
+.pill-buy::before    { content: "$\00A0"; }        /* $  Buy    */
+
+/* In-cell hierarchy: bold Title, muted Composer & Duration */
+main tbody td:first-child {
+  font-weight: 700;
+}
+
+main tbody td:nth-child(2) {
+  color: var(--ink-soft);
+  font-size: 0.92rem;
+}
+
+main tbody td:nth-child(4) {
+  color: var(--ink-soft);
+  font-size: 0.9rem;
+}
+
+/* Year shown as a small rounded chip */
+.chip {
+  display: inline-block;
+  padding: 0.15rem 0.55rem;
+  background: var(--cream-soft);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  font-size: 0.85rem;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+/* ============================================================
+   RESPONSIVE TABLE — on phones, turn the repertoire table into
+   stacked cards (one card per piece). Each cell shows its column
+   name via its data-label attribute; the header row is hidden.
+   ============================================================ */
+@media (max-width: 640px) {
+  .table-wrap {
+    max-height: none;        /* no inner scroll — cards flow normally */
+    overflow: visible;
+    border-radius: 0;
+    box-shadow: none;
+  }
+
+  main table {
+    min-width: 0;            /* drop the 640px floor so cards fit */
+  }
+
+  /* the header row is redundant once every cell carries its label */
+  main thead {
+    display: none;
+  }
+
+  main tbody,
+  main tbody tr,
+  main tbody td {
+    display: block;
+    width: 100%;
+  }
+
+  /* each row becomes a white card */
+  main tbody tr {
+    margin-bottom: 1.25rem;
+    padding: 0.75rem 1rem;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    background: #fff;
+  }
+
+  main tbody tr:nth-child(even) {
+    background: #fff;        /* override the desktop zebra striping */
+  }
+
+  /* "Label .......... value" rows */
+  main tbody td {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    text-align: right;
+    border-bottom: none;
+    padding: 0.35rem 0;
+  }
+
+  main tbody td::before {
+    content: attr(data-label);
+    font-weight: 600;
+    color: var(--ink-soft);
+    text-align: left;
+  }
+
+  /* Title spans the full width as the card's heading (no label) */
+  main tbody td:first-child {
+    display: block;
+    text-align: left;
+    font-size: 1.05rem;
+    padding: 0 0 0.5rem;
+    margin-bottom: 0.5rem;
+    border-bottom: 1px solid var(--line);
+  }
+
+  main tbody td:first-child::before {
+    content: none;
+  }
+}

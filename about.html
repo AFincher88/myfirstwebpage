@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Meet the Kaibab Trio — Northern Arizona University Kitt School of Music faculty performing new and historic works for oboe, clarinet, and piano." />
+    <title>About — Kaibab Trio</title>
+    <link rel="icon" href="images/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="global.css" />
+    <link rel="stylesheet" href="about.css" />
+  </head>
+  <body>
+
+    <!-- Skip link: first focusable element so keyboard/screen-reader users can
+         jump past the nav to the main content. Pure HTML anchor to #main. -->
+    <a href="#main">Skip to Main Content</a>
+
+    <!-- Site header: site name (plain text) + tagline, wrapping the nav below. -->
+    <header class="site-header">
+      <div class="header-inner">
+        <div>
+          <p class="site-title"><a href="index.html">Kaibab Trio</a></p>
+          <p class="site-tagline">Shane Werts, oboe | Kelsi Doolittle, clarinet | Aimee Fincher, piano</p>
+        </div>
+        <nav class="main-nav" aria-label="Primary">
+          <a href="index.html">HOME</a>
+          <a href="about.html" class="current" aria-current="page">ABOUT</a>
+          <a href="media.html">MEDIA</a>
+          <a href="resources.html">RESOURCES</a>
+          <a href="contact.html">CONTACT</a>
+        </nav>
+      </div>
+    </header>
+
+    <main id="main" tabindex="-1">
+
+    <h1>About Us</h1>
+
+    <!-- Group photo beside the trio's story (side by side; stacks on mobile). -->
+    <div class="media-row">
+      <img src="images/kaibab_trio_headshot.jpg" alt="Kaibab Trio Headshot" loading="lazy">
+      <div class="media-row-text">
+        <p>The Kaibab Trio was established in Fall 2024 by Northern Arizona University Kitt School of Music faculty Shane Werts, oboe, Kelsi Doolittle, clarinet, and Aimee Fincher, piano. Each of the members of the Kaibab Trio are dedicated to sharing their love of music and amplifying voices that may be historically underrepresented. The group brings extensive experience from orchestral, solo, and chamber backgrounds to their collaboration. While the word Kaibab is associated with multiple areas of Northern Arizona, its literal translation means &ldquo;mountain lying down,&rdquo; referring to the plateaus near the Grand Canyon. The name is inspired by the Kaibab National Forest, located near the trio&rsquo;s hometown of Flagstaff, Arizona and the Grand Canyon. Kelsi, Shane, and Aimee are working to connect their music with their fondness for the northern Arizona region by commissioning new works for this instrumentation inspired by the unique wildlife and scenery of the area.</p>
+      </div>
+    </div>
+
+    <hr>
+
+    <!-- Member bios: each member is a .member tile (photo beside text). -->
+
+    <h2>Members</h2>
+
+    <!-- Each member is a flex row (.member). CSS alternates the photo
+         side automatically: 1st left, 2nd right, 3rd left. -->
+    <section class="member">
+      <div class="member-photo">
+        <img src="images/Werts.avif" alt="Shane Werts, oboe" loading="lazy">
+      </div>
+      <div class="member-text">
+        <h3>Shane Werts, oboe</h3>
+        <p>Placeholder bio &mdash; Shane Werts is awesome, we will think of more later. Read more at <a href="https://www.shanewertsmusic.com" target="_blank" rel="noopener">shanewertsmusic.com</a>.</p>
+      </div>
+    </section>
+
+<!--In the following section don't forget to choose EITHER the name as link OR the website as link. Double check, is this correct?
+-->
+    <section class="member">
+      <div class="member-photo">
+        <img src="images/Doolittle.webp" alt="Kelsi Doolittle, clarinet" loading="lazy">
+      </div>
+      <div class="member-text">
+        <h3>Kelsi Doolittle, clarinet</h3>
+        <p>Placeholder bio &mdash; Kelsi is awesome, we will think of more later. Read more at <a href="https://www.kelsidoolittleclarinet.com" target="_blank" rel="noopener">kelsidoolittleclarinet.com</a>.</p>
+      </div>
+    </section>
+
+    <section class="member">
+      <div class="member-photo">
+        <img src="images/fincher_headshot.jpeg" alt="Aimee Fincher, piano" loading="lazy">
+      </div>
+      <div class="member-text">
+        <h3>Aimee Fincher, piano</h3>
+        <p>Placeholder bio &mdash; Aimee likes spreadsheets. Read more at <a href="https://www.aimeefincher.com" target="_blank" rel="noopener">aimeefincher.com</a>.</p>
+      </div>
+    </section>
+
+    </main>
+     <footer>
+  <!-- Repeat the main nav so people who scroll to the bottom can get around -->
+  <nav aria-label="Footer">
+    <a href="index.html">Home</a> |
+    <a href="about.html">About</a> |
+    <a href="media.html">Media</a> |
+    <a href="resources.html">Resources</a> |
+    <a href="contact.html">Contact</a>
+  </nav>
+
+  <!-- <address> is the correct tag for contact details of the page/site owner -->
+  <address>
+    Aimee Fincher<br>Placeholder text (link to contact form? here)
+  </address>
+
+  <!-- Not going to use the social links below right now  -->
+  <!-- External links: rel="noopener" is good practice with target="_blank" -->
+  <nav aria-label="Social media">
+    <a href="#" target="_blank" rel="noopener">Instagram</a> |
+    <a href="#" target="_blank" rel="noopener">YouTube</a> |
+    <a href="#" target="_blank" rel="noopener">Facebook</a>
+  </nav>
+
+  <!-- <small> carries the legal/secondary connotation for copyright lines -->
+  <small>&copy; 2026 Aimee Fincher. All rights reserved.</small>
+</footer>
+  </body>
+</html>

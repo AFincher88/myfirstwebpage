@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="The Kaibab Trio — Shane Werts (oboe), Kelsi Doolittle (clarinet), and Aimee Fincher (piano), a chamber ensemble of NAU faculty based in Flagstaff, Arizona." />
+    <title>Kaibab Trio</title>
+    <link rel="icon" href="images/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="global.css" />
+    <link rel="stylesheet" href="index.css" />
+  </head>
+  <body>
+
+    <!-- Skip link: first focusable element so keyboard/screen-reader users can
+         jump past the nav to the main content. Pure HTML anchor to #main. -->
+    <a href="#main">Skip to Main Content</a>
+
+    <!-- Site header: site name (plain text) + tagline, wrapping the nav below. -->
+    <header class="site-header">
+      <div class="header-inner">
+        <div>
+          <p class="site-title"><a href="index.html">Kaibab Trio</a></p>
+          <p class="site-tagline">Shane Werts, oboe | Kelsi Doolittle, clarinet | Aimee Fincher, piano</p>
+        </div>
+        <nav class="main-nav" aria-label="Primary">
+          <a href="index.html" class="current" aria-current="page">HOME</a>
+          <a href="about.html">ABOUT</a>
+          <a href="media.html">MEDIA</a>
+          <a href="resources.html">RESOURCES</a>
+          <a href="contact.html">CONTACT</a>
+        </nav>
+      </div>
+    </header>
+
+    <main id="main" tabindex="-1">
+
+    <section class="hero" aria-label="Kaibab Trio hero">
+      <div class="hero-content">
+        <h1>Kaibab Trio</h1>
+        <p>Shane Werts, oboe | Kelsi Doolittle, clarinet | Aimee Fincher, piano</p>
+        <div class="hero-cta"><a href="about.html">Read our story</a></div>
+      </div>
+    </section>
+
+    <section class="content-section band-blush">
+      <h2>About Us</h2>
+      <!-- .media-row places the photo beside the text (they stack on
+           small screens). Styling lives in mystyle.css under "Image + text band". -->
+      <div class="media-row">
+        <img src="images/kaibab_trio_headshot.jpg" alt="Kaibab Trio headshot" loading="lazy" />
+        <div class="media-row-text">
+          <p>The Kaibab Trio &mdash; Shane Werts (oboe), Kelsi Doolittle (clarinet), and Aimee Fincher (piano) &mdash; is a chamber ensemble of Northern Arizona University Kitt School of Music faculty, founded in Fall 2024. Inspired by the Kaibab National Forest near their hometown of Flagstaff, the trio is dedicated to commissioning new works and amplifying historically underrepresented voices.</p>
+          <p><a href="about.html" class="button-link">Read more about us &raquo;</a></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- (Divider removed: the blush "About" band and the sage "News"
+         band now provide the visual separation between sections.) -->
+    <!-- News slideshow. Previously an HTML-only iframe carousel made of separate
+         slide1/2/3.html files; consolidated here as one <section> (the slideshow)
+         containing a <ul> of slides (one <li> each). This list structure is the
+         accessible-carousel shape: when CSS/JS is added, the script hides all but
+         one <li> and Prev/Next walks the list. Until then, all slides show stacked
+         as a list. Pure HTML, no CSS/JS. -->
+    <section class="news full-bleed" aria-label="News">
+      <h2>News</h2>
+      <p>Recent highlights from the Kaibab Trio.</p>
+
+      <!-- .news-grid is a CSS-only horizontal carousel: it scrolls
+           sideways and snaps to each card. Swipe on a phone, or
+           scroll/drag on a trackpad. Each <li> has an id (news-1..5)
+           so the dot links below can scroll the track to it. -->
+      <ul class="news-grid">
+        <li id="news-1">
+          <img src="images/MusicbyWomenfestival.jpg" alt="Kaibab Trio at Music by Women Festival" width="500" height="450" loading="lazy" />
+          <h3>Music by Women Festival &mdash; March 2026</h3>
+          <p>The NAU faculty contingent performed at the Music by Women Festival in March 2026.</p>
+        </li>
+
+        <li id="news-2">
+          <!-- Embedded YouTube video.
+               To embed, use the /embed/ URL form (NOT the normal watch?v= link):
+                 watch page:  https://www.youtube.com/watch?v=VIDEO_ID
+                 embed form:  https://www.youtube.com/embed/VIDEO_ID -->
+          <iframe
+            width="640" height="360"
+            loading="lazy"
+            src="https://www.youtube.com/embed/icagXyP-IZU"
+            title="Kelsi Doolittle performs Lucas's Garden by Amanda Harberg"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen></iframe>
+          <h3>Lucas&rsquo;s Garden, by Amanda Harberg</h3>
+          <p>Kelsi Doolittle performs this piece by Amanda Harberg with other members of the New World Symphony.</p>
+        </li>
+ <li id="news-3">
+          <img src="images/MusicbyWomenfestival.jpg" alt="Kaibab Trio at Music by Women Festival" width="500" height="450" loading="lazy" />
+          <h3>Music by Women Festival &mdash; March 2026</h3>
+          <p>The NAU faculty contingent performed at the Music by Women Festival in March 2026.</p>
+        </li>
+
+        <li id="news-4">
+          <!-- Embedded YouTube video.
+               To embed, use the /embed/ URL form (NOT the normal watch?v= link):
+                 watch page:  https://www.youtube.com/watch?v=VIDEO_ID
+                 embed form:  https://www.youtube.com/embed/VIDEO_ID -->
+          <iframe
+            width="640" height="360"
+            loading="lazy"
+            src="https://www.youtube.com/embed/icagXyP-IZU"
+            title="Kelsi Doolittle performs Lucas's Garden by Amanda Harberg"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen></iframe>
+          <h3>Lucas&rsquo;s Garden, by Amanda Harberg</h3>
+          <p>Kelsi Doolittle performs this piece by Amanda Harberg with other members of the New World Symphony.</p>
+        </li>
+        <li id="news-5">
+          <iframe
+            width="640" height="360"
+            loading="lazy"
+            src="https://www.youtube.com/embed/kFfy8RtbrQc?start=3286"
+            title="Kaibab Trio performs at the 2026 Music by Women Festival"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen></iframe>
+          <h3>Ruth Gipps&rsquo; Trio</h3>
+          <p>Kaibab Trio performs this piece by Ruth Gipps at the 2026 Music by Women Festival at the Mississippi University for Women, Columbus, MS.</p>
+        </li>
+      </ul>
+
+      <!-- Carousel navigation (CSS-only). Each dot is an anchor link to a
+           slide's id above; clicking one scrolls the track to that card.
+           No JavaScript: this works because the slides live in a
+           horizontally scrolling container. -->
+      <nav class="news-dots" aria-label="News slides">
+        <a href="#news-1" aria-label="Slide 1"></a>
+        <a href="#news-2" aria-label="Slide 2"></a>
+        <a href="#news-3" aria-label="Slide 3"></a>
+        <a href="#news-4" aria-label="Slide 4"></a>
+        <a href="#news-5" aria-label="Slide 5"></a>
+      </nav>
+    </section>
+
+    </main>
+    <footer>
+  <!-- Repeat the main nav so people who scroll to the bottom can get around -->
+  <nav aria-label="Footer">
+    <a href="index.html">Home</a> |
+    <a href="about.html">About</a> |
+    <a href="media.html">Media</a> |
+    <a href="resources.html">Resources</a> |
+    <a href="contact.html">Contact</a>
+  </nav>
+
+  <!-- <address> is the correct tag for contact details of the page/site owner -->
+  <address>
+    Aimee Fincher<br>Placeholder text (link to contact form? here)
+  </address>
+
+  <!-- Not going to use the social links below right now  -->
+  <!-- External links: rel="noopener" is good practice with target="_blank" -->
+  <nav aria-label="Social media">
+    <a href="#" target="_blank" rel="noopener">Instagram</a> |
+    <a href="#" target="_blank" rel="noopener">YouTube</a> |
+    <a href="#" target="_blank" rel="noopener">Facebook</a>
+  </nav>
+
+  <!-- <small> carries the legal/secondary connotation for copyright lines -->
+  <small>&copy; 2026 Aimee Fincher. All rights reserved.</small>
+</footer>
+  </body>
+</html>

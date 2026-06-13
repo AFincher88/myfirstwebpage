@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Watch and listen to performances by the Kaibab Trio for oboe, clarinet, and piano." />
+    <title>Media — Kaibab Trio</title>
+    <link rel="icon" href="images/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="global.css" />
+    <link rel="stylesheet" href="media.css" />
+  </head>
+  <body>
+    <!-- Skip link: first focusable element so keyboard/screen-reader users can
+         jump past the nav to the main content. Pure HTML anchor to #main. -->
+         <!-- <base> href="LINK" (no end tag) Specifies a default target for all links on this page. Possible to use later?-->
+    <a href="#main">Skip to Main Content</a>
+
+    <!-- Site header: site name (plain text) + tagline, wrapping the nav below. -->
+    <header class="site-header">
+      <div class="header-inner">
+        <div>
+          <p class="site-title"><a href="index.html">Kaibab Trio</a></p>
+          <p class="site-tagline">Shane Werts, oboe | Kelsi Doolittle, clarinet | Aimee Fincher, piano</p>
+        </div>
+        <nav class="main-nav" aria-label="Primary">
+          <a href="index.html">HOME</a>
+          <a href="about.html">ABOUT</a>
+          <a href="media.html" class="current" aria-current="page">MEDIA</a>
+          <a href="resources.html">RESOURCES</a>
+          <a href="contact.html">CONTACT</a>
+        </nav>
+      </div>
+    </header>
+    <main id="main" tabindex="-1">
+    <h1>Media</h1>
+    <!--Commmenting out text for now - Nothing to say.
+    <p> This is the media page content. </p> 
+    -->
+    <!--Don't want this first bit.
+    <p><a href="https://www.youtube.com/watch?v=wzB2J4R8VIU&list=PLJtjuxfmuIU8VP9AIvR8Z4xKcixfY4FNq" target="_blank">Watch on YouTube</a></p>
+    -->
+    <!-- Embedded YouTube video in its own DIV section (pure HTML, no CSS).
+         The watch URL (.../watch?v=ID) becomes the embed URL (.../embed/ID). -->
+    
+    <section class="media-grid">
+       <!-- <figure> could be used here instead of <div> to add a caption to the blocks. -->
+         <figure class="media-card">
+      <h2>Legacy Concerto – Shane Werts</h2>
+      <iframe
+        width="560"
+        height="315"
+        loading="lazy"
+        src="https://www.youtube.com/embed/Z50lCw4cB9k"
+        title="Shane Werts performs excerpts from Legacy Concerto by Oscar Navarro"
+        allowfullscreen></iframe>
+        <figcaption>Shane Werts performs excerpts from Legacy Concerto by Oscar Navarro.</figcaption>
+    </figure>
+
+    <!-- Media blocks: each <div> groups one media item. Divs stack vertically
+         by default (no CSS needed), so they're ideal for separating blocks. -->
+
+    <!-- Block 1: audio only -->
+     <!-- Commenting the audio block out for now, no pure audio file yet
+    <div>
+      <h2>Audio Recording</h2>
+      <audio controls>
+        <source src="recording.mp3" type="audio/mpeg" />
+        Your browser does not support the audio element.
+      </audio>
+      <p>Add an .mp3 file named "recording.mp3" to this folder to play it.</p>
+    </div>
+    --> 
+    <!-- Block 2: performance video (moved here from the Resources page).
+         Poulenc Sextet, 1st mvt. The watch link was .../watch?v=3Fg6n-XMFlc,
+         so the embed form is .../embed/3Fg6n-XMFlc. -->
+    <figure class="media-card">
+      <h2>Poulenc Sextet &mdash; Kelsi Doolittle</h2>
+      <iframe
+        width="560"
+        height="315"
+        loading="lazy"
+        src="https://www.youtube.com/embed/3Fg6n-XMFlc"
+        title="Poulenc Sextet, first movement"
+        allowfullscreen></iframe>
+      <figcaption>First movement of Poulenc&rsquo;s Sextet for piano and wind quintet.</figcaption>
+    </figure>
+
+    <!-- Block 3: performance video (moved here from the Resources page).
+         Lucas's Garden by Amanda Harberg. Embed form of .../watch?v=icagXyP-IZU. -->
+    <figure class="media-card">
+      <h2>Lucas&rsquo;s Garden &mdash; Amanda Harberg</h2>
+      <iframe
+        width="560"
+        height="315"
+        loading="lazy"
+        src="https://www.youtube.com/embed/icagXyP-IZU"
+        title="Lucas's Garden by Amanda Harberg"
+        allowfullscreen></iframe>
+      <figcaption>Kelsi Doolittle performs in the world premiere of Amanda Harberg&rsquo;s Lucas&rsquo;s Garden, alongside fellow New World Symphony members.</figcaption>
+    </figure>
+
+    <!-- Block 4: photo with text and a link to the recording -->
+    <figure class="media-card">
+      <h2>Photo &amp; Recording Link</h2>
+      <img src="images/KaibabTrioPerf2.jpg" alt="Performance photo" width="315" loading="lazy" />
+      <figcaption>
+        A moment from the recital at the Music by Women Festival, March 2026.
+        <a href="https://www.youtube.com/watch?v=kFfy8RtbrQc&t=3286s" target="_blank" rel="noopener">Youtube of Ruth Gipps' Trio Performance</a>.
+      </figcaption>
+    </figure>
+    </section>
+    </main>
+     <footer>
+  <!-- Repeat the main nav so people who scroll to the bottom can get around -->
+  <nav aria-label="Footer">
+    <a href="index.html">Home</a> |
+    <a href="about.html">About</a> |
+    <a href="media.html">Media</a> |
+    <a href="resources.html">Resources</a> |
+    <a href="contact.html">Contact</a>
+  </nav>
+
+  <!-- <address> is the correct tag for contact details of the page/site owner -->
+  <address>
+    Aimee Fincher<br>Placeholder text (link to contact form? here)
+  </address>
+
+  <!-- Not going to use the social links below right now  -->
+  <!-- External links: rel="noopener" is good practice with target="_blank" -->
+  <nav aria-label="Social media">
+    <a href="#" target="_blank" rel="noopener">Instagram</a> |
+    <a href="#" target="_blank" rel="noopener">YouTube</a> |
+    <a href="#" target="_blank" rel="noopener">Facebook</a>
+  </nav>
+
+  <!-- <small> carries the legal/secondary connotation for copyright lines -->
+  <small>&copy; 2026 Aimee Fincher. All rights reserved.</small>
+</footer>
+    </body>
+    </html>
